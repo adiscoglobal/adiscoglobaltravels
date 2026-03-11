@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adisco Global Travels - Your Journey Begins Here</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+:root {
+--primary: #FF6B6B;
+--secondary: #4ECDC4;
+--dark: #2C3E50;
+--light: #F7F9FC;
+--accent: #FFE66D;
+}
+body {
+font-family: 'Inter', sans-serif;
+color: var(--dark);
+line-height: 1.6;
+overflow-x: hidden;
+}
+/* Navigation */
+nav {
+position: fixed;
+top: 0;
+width: 100%;
+padding: 1.5rem 5%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 1000;
+transition: all 0.3s ease;
+background: transparent;
+}
+nav.scrolled {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+padding: 1rem 5%;
+}
+.logo {
+font-family: 'Playfair Display', serif;
+font-size: 1.8rem;
+font-weight: 700;
+color: white;
+text-decoration: none;
+transition: color 0.3s;
+}
+nav.scrolled .logo {
+color: var(--dark);
+}
+.nav-links {
+display: flex;
+gap: 2.5rem;
+list-style: none;
+}
+.nav-links a {
+text-decoration: none;
+color: white;
+font-weight: 500;
+transition: color 0.3s;
+position: relative;
+}
+nav.scrolled .nav-links a {
+color: var(--dark);
+}
+.nav-links a::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 0;
+width: 0;
+height: 2px;
+background: var(--primary);
+transition: width 0.3s;
+}
+.nav-links a:hover::after {
+width: 100%;
+}
+/* Hero Section */
+.hero {
+height: 100vh;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+}
+.hero::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+background-size: cover;
+animation: wave 10s ease-in-out infinite;
+}
+@keyframes wave {
+0%, 100% { transform: translateX(0); }
+50% { transform: translateX(-20px); }
+}
+.hero-content {
+text-align: center;
+color: white;
+z-index: 2;
+padding: 0 2rem;
+max-width: 900px;
+}
+.hero h1 {
+font-family: 'Playfair Display', serif;
+font-size: 4rem;
+margin-bottom: 1rem;
+opacity: 0;
+transform: translateY(30px);
+animation: fadeInUp 1s ease forwards;
+}
+.hero p {
+font-size: 1.3rem;
+margin-bottom: 2rem;
+opacity: 0;
+transform: translateY(30px);
+animation: fadeInUp 1s ease 0.2s forwards;
+}
+@keyframes fadeInUp {
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.cta-buttons {
+display: flex;
+gap: 1rem;
+justify-content: center;
+flex-wrap: wrap;
+opacity: 0;
+animation: fadeInUp 1s ease 0.4s forwards;
+}
+.btn {
+padding: 1rem 2.5rem;
+border-radius: 50px;
+text-decoration: none;
+font-weight: 600;
+transition: all 0.3s;
+display: inline-block;
+border: 2px solid transparent;
+}
+.btn-primary {
+background: var(--primary);
+color: white;
+box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+.btn-primary:hover {
+transform: translateY(-3px);
+box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+.btn-secondary {
+background: transparent;
+color: white;
+border: 2px solid white;
+}
+.btn-secondary:hover {
+background: white;
+color: var(--dark);
+}
+/* Floating Cards Animation */
+.floating-cards {
+position: absolute;
+width: 100%;
+height: 100%;
+pointer-events: none;
+}
+.float-card {
+position: absolute;
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+border-radius: 20px;
+padding: 1.5rem;
+color: white;
+animation: float 6s ease-in-out infinite;
+}
+.float-card:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.float-card:nth-child(2) { top: 60%; right: 10%; animation-delay: 2s; }
+.float-card:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 4s; }
+@keyframes float {
+0%, 100% { transform: translateY(0) rotate(0deg); }
+50% { transform: translateY(-20px) rotate(2deg); }
+}
+/* Destinations Section */
+.destinations {
+padding: 6rem 5%;
+background: var(--light);
+}
+.section-header {
+text-align: center;
+margin-bottom: 4rem;
+}
+.section-header h2 {
+font-family: 'Playfair Display', serif;
+font-size: 2.8rem;
+color: var(--dark);
+margin-bottom: 1rem;
+}
+.section-header p {
+color: #666;
+font-size: 1.1rem;
+max-width: 600px;
+margin: 0 auto;
+}
+.destinations-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+max-width: 1400px;
+margin: 0 auto;
+}
+.destination-card {
+background: white;
+border-radius: 20px;
+overflow: hidden;
+box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+transition: all 0.3s ease;
+cursor: pointer;
+}
+.destination-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.card-image {
+height: 250px;
+background: linear-gradient(45deg, #667eea, #764ba2);
+position: relative;
+overflow: hidden;
+}
+.card-image::after {
+content: '✈️';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) scale(0);
+font-size: 4rem;
+transition: transform 0.3s;
+}
+.destination-card:hover .card-image::after {
+transform: translate(-50%, -50%) scale(1);
+}
+.card-content {
+padding: 1.5rem;
+}
+.card-content h3 {
+font-size: 1.5rem;
+margin-bottom: 0.5rem;
+color: var(--dark);
+}
+.price {
+color: var(--primary);
+font-size: 1.3rem;
+font-weight: 700;
+margin-bottom: 0.5rem;
+}
+.rating {
+color: #ffc107;
+margin-bottom: 1rem;
+}
+/* Services Section */
+.services {
+padding: 6rem 5%;
+background: white;
+}
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+.service-card {
+text-align: center;
+padding: 2.5rem 2rem;
+border-radius: 20px;
+background: var(--light);
+transition: all 0.3s;
+position: relative;
+overflow: hidden;
+}
+.service-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 5px;
+background: linear-gradient(90deg, var(--primary), var(--secondary));
+transform: scaleX(0);
+transition: transform 0.3s;
+}
+.service-card:hover::before {
+transform: scaleX(1);
+}
+.service-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.service-icon {
+font-size: 3rem;
+margin-bottom: 1rem;
+display: inline-block;
+transition: transform 0.3s;
+}
+.service-card:hover .service-icon {
+transform: scale(1.2) rotate(5deg);
+}
+/* Booking Form */
+.booking-section {
+padding: 6rem 5%;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+}
+.booking-container {
+max-width: 800px;
+margin: 0 auto;
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+padding: 3rem;
+border-radius: 30px;
+border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.form-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1.5rem;
+margin-bottom: 1.5rem;
+}
+.form-group {
+display: flex;
+flex-direction: column;
+}
+.form-group label {
+margin-bottom: 0.5rem;
+font-weight: 500;
+}
+.form-group input,
+.form-group select {
+padding: 1rem;
+border: none;
+border-radius: 10px;
+background: rgba(255, 255, 255, 0.9);
+font-family: inherit;
+transition: all 0.3s;
+}
+.form-group input:focus,
+.form-group select:focus {
+outline: none;
+box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+}
+.submit-btn {
+width: 100%;
+padding: 1.2rem;
+background: var(--primary);
+color: white;
+border: none;
+border-radius: 10px;
+font-size: 1.1rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s;
+}
+.submit-btn:hover {
+background: #ff5252;
+transform: translateY(-2px);
+box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+}
+/* Testimonials */
+.testimonials {
+padding: 6rem 5%;
+background: var(--light);
+}
+.testimonial-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+.testimonial-card {
+background: white;
+padding: 2rem;
+border-radius: 20px;
+box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+position: relative;
+transition: transform 0.3s;
+}
+.testimonial-card:hover {
+transform: translateY(-5px);
+}
+.testimonial-card::before {
+content: '"';
+font-family: 'Playfair Display', serif;
+font-size: 4rem;
+color: var(--primary);
+opacity: 0.3;
+position: absolute;
+top: -10px;
+left: 20px;
+}
+.testimonial-text {
+font-style: italic;
+margin-bottom: 1.5rem;
+color: #555;
+line-height: 1.8;
+}
+.testimonial-author {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+.author-avatar {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background: linear-gradient(45deg, var(--primary), var(--secondary));
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-weight: 600;
+}
+/* Footer */
+footer {
+background: var(--dark);
+color: white;
+padding: 4rem 5% 2rem;
+}
+.footer-content {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 3rem;
+max-width: 1200px;
+margin: 0 auto;
+margin-bottom: 3rem;
+}
+.footer-section h3 {
+font-family: 'Playfair Display', serif;
+margin-bottom: 1.5rem;
+color: var(--accent);
+}
+.footer-section ul {
+list-style: none;
+}
+.footer-section ul li {
+margin-bottom: 0.8rem;
+}
+.footer-section a {
+color: #aaa;
+text-decoration: none;
+transition: color 0.3s;
+}
+.footer-section a:hover {
+color: var(--primary);
+}
+.social-links {
+display: flex;
+gap: 1rem;
+margin-top: 1rem;
+}
+.social-links a {
+padding: 0.8rem 1.5rem;
+background: rgba(255,255,255,0.1);
+border-radius: 8px;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+transition: all 0.3s;
+font-size: 0.9rem;
+}
+.social-links a:hover {
+background: var(--primary);
+transform: translateY(-3px);
+}
+.footer-bottom {
+text-align: center;
+padding-top: 2rem;
+border-top: 1px solid rgba(255,255,255,0.1);
+color: #aaa;
+}
+/* Mobile Menu */
+.mobile-menu-btn {
+display: none;
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+}
+nav.scrolled .mobile-menu-btn {
+color: var(--dark);
+}
+/* Responsive */
+@media (max-width: 768px) {
+.nav-links {
+display: none;
+}
+.mobile-menu-btn {
+display: block;
+}
+.hero h1 {
+font-size: 2.5rem;
+}
+.section-header h2 {
+font-size: 2rem;
+}
+.booking-container {
+padding: 2rem 1.5rem;
+}
+.social-links {
+flex-direction: column;
+}
+}
+/* Scroll Reveal Animation */
+.reveal {
+opacity: 0;
+transform: translateY(30px);
+transition: all 0.8s ease;
+}
+.reveal.active {
+opacity: 1;
+transform: translateY(0);
+}
+</style>
+</head>
+<body>
+<!-- Navigation -->
+<nav id="navbar">
+<a href="#" class="logo">✈️ Adisco Global Travels</a>
+<ul class="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#destinations">Destinations</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#booking">Book Now</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<button class="mobile-menu-btn">☰</button>
+</nav>
+<!-- Hero Section -->
+<section class="hero" id="home">
+<div class="floating-cards">
+<div class="float-card">
+<h4>🌴 Bali</h4>
+<p>From $899</p>
+</div>
+<div class="float-card">
+<h4>🏔️ Swiss Alps</h4>
+<p>From $1,299</p>
+</div>
+<div class="float-card">
+<h4>🗼 Paris</h4>
+<p>From $1,099</p>
+</div>
+</div>
+<div class="hero-content">
+<h1>Discover Your Next Adventure</h1>
+<p>Explore the world's most breathtaking destinations with personalized travel experiences crafted just for you.</p>
+<div class="cta-buttons">
+<a href="#booking" class="btn btn-primary">Start Your Journey</a>
+<a href="#destinations" class="btn btn-secondary">View Destinations</a>
+</div>
+</div>
+</section>
+<!-- Destinations -->
+<section class="destinations" id="destinations">
+<div class="section-header reveal">
+<h2>Popular Destinations</h2>
+<p>Handpicked locations that promise unforgettable memories and unique experiences for every traveler.</p>
+</div>
+<div class="destinations-grid">
+<div class="destination-card reveal">
+<div class="card-image" style="background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);"></div>
+<div class="card-content">
+<h3>Santorini, Greece</h3>
+<div class="price">$1,299 <span style="font-size: 0.9rem; color: #666; font-weight: 400;">/ person</span></div>
+<div class="rating">★★★★★ (4.9)</div>
+<p>White-washed buildings, stunning sunsets, and crystal-clear waters await in this Mediterranean paradise.</p>
+</div>
+</div>
+<div class="destination-card reveal">
+<div class="card-image" style="background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);"></div>
+<div class="card-content">
+<h3>Kyoto, Japan</h3>
+<div class="price">$1,599 <span style="font-size: 0.9rem; color: #666; font-weight: 400;">/ person</span></div>
+<div class="rating">★★★★★ (4.8)</div>
+<p>Ancient temples, traditional tea houses, and beautiful cherry blossoms in the cultural heart of Japan.</p>
+</div>
+</div>
+<div class="destination-card reveal">
+<div class="card-image" style="background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%);"></div>
+<div class="card-content">
+<h3>Machu Picchu, Peru</h3>
+<div class="price">$1,899 <span style="font-size: 0.9rem; color: #666; font-weight: 400;">/ person</span></div>
+<div class="rating">★★★★★ (4.9)</div>
+<p>Explore the lost city of the Incas high in the Andes Mountains with expert local guides.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Services -->
+<section class="services" id="services">
+<div class="section-header reveal">
+<h2>Our Services</h2>
+<p>Everything you need for a perfect trip, all in one place.</p>
+</div>
+<div class="services-grid">
+<div class="service-card reveal">
+<div class="service-icon">✈️</div>
+<h3>Flight Booking</h3>
+<p>Best deals on international and domestic flights with 24/7 support.</p>
+</div>
+<div class="service-card reveal">
+<div class="service-icon">🏨</div>
+<h3>Hotel Reservations</h3>
+<p>Handpicked accommodations from luxury resorts to cozy boutique hotels.</p>
+</div>
+<div class="service-card reveal">
+<div class="service-icon">🎯</div>
+<h3>Guided Tours</h3>
+<p>Expert local guides showing you hidden gems and authentic experiences.</p>
+</div>
+<div class="service-card reveal">
+<div class="service-icon">📋</div>
+<h3>Travel Insurance</h3>
+<p>Comprehensive coverage for peace of mind during your adventures.</p>
+</div>
+</div>
+</section>
+<!-- Booking Form -->
+<section class="booking-section" id="booking">
+<div class="section-header reveal" style="color: white;">
+<h2>Book Your Trip</h2>
+<p style="color: rgba(255,255,255,0.9);">Fill out the form below and we'll create your perfect itinerary.</p>
+</div>
+<div class="booking-container reveal">
+<form id="bookingForm">
+<div class="form-grid">
+<div class="form-group">
+<label for="name">Full Name</label>
+<input type="text" id="name" required placeholder="John Doe">
+</div>
+<div class="form-group">
+<label for="email">Email Address</label>
+<input type="email" id="email" required placeholder="john@example.com">
+</div>
+<div class="form-group">
+<label for="destination">Destination</label>
+<select id="destination" required>
+<option value="">Select Destination</option>
+<option value="santorini">Santorini, Greece</option>
+<option value="kyoto">Kyoto, Japan</option>
+<option value="machu-picchu">Machu Picchu, Peru</option>
+<option value="bali">Bali, Indonesia</option>
+<option value="paris">Paris, France</option>
+<option value="maldives">Maldives</option>
+</select>
+</div>
+<div class="form-group">
+<label for="date">Travel Date</label>
+<input type="date" id="date" required>
+</div>
+<div class="form-group">
+<label for="travelers">Number of Travelers</label>
+<input type="number" id="travelers" min="1" max="20" required placeholder="2">
+</div>
+<div class="form-group">
+<label for="phone">Phone Number</label>
+<input type="tel" id="phone" placeholder="+234 810 969 7754">
+</div>
+</div>
+<button type="submit" class="submit-btn">Request Quote →</button>
+</form>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="testimonials">
+<div class="section-header reveal">
+<h2>What Travelers Say</h2>
+<p>Real experiences from real adventurers.</p>
+</div>
+<div class="testimonial-grid">
+<div class="testimonial-card reveal">
+<p class="testimonial-text">"Adisco Global Travels planned our honeymoon to perfection. Every detail was taken care of, from the airport transfers to the romantic dinners. Absolutely magical!"</p>
+<div class="testimonial-author">
+<div class="author-avatar">CA</div>
+<div>
+<strong>Chioma Adeleke</strong>
+<p style="font-size: 0.9rem; color: #666;">Honeymoon in Maldives</p>
+</div>
+</div>
+</div>
+<div class="testimonial-card reveal">
+<p class="testimonial-text">"The guided tour in Kyoto was incredible. Our guide knew all the secret spots and the history behind every temple. Best travel experience ever!"</p>
+<div class="testimonial-author">
+<div class="author-avatar">OO</div>
+<div>
+<strong>Oluwaseun Okafor</strong>
+<p style="font-size: 0.9rem; color: #666;">Cultural Tour in Japan</p>
+</div>
+</div>
+</div>
+<div class="testimonial-card reveal">
+<p class="testimonial-text">"Professional service from start to finish. They found us deals we couldn't find anywhere else and the 24/7 support gave us peace of mind."</p>
+<div class="testimonial-author">
+<div class="author-avatar">FN</div>
+<div>
+<strong>Fatima Nwachukwu</strong>
+<p style="font-size: 0.9rem; color: #666;">Family Trip to Europe</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer id="contact">
+<div class="footer-content">
+<div class="footer-section">
+<h3>Adisco Global Travels</h3>
+<p style="color: #aaa; line-height: 1.8;">Your trusted partner in creating unforgettable travel experiences since 2010. We believe every journey should be as unique as you are.</p>
+<div class="social-links">
+<a href="https://tiktok.com/@adiscoglobal" target="_blank">📱 TikTok</a>
+<a href="https://facebook.com/adiscoglobaltravels" target="_blank">📘 Facebook</a>
+<a href="https://youtube.com/@adiscoglobaltravels" target="_blank">▶️ YouTube</a>
+</div>
+</div>
+<div class="footer-section">
+<h3>Quick Links</h3>
+<ul>
+<li><a href="#destinations">Destinations</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#booking">Book Now</a></li>
+<li><a href="#">Travel Blog</a></li>
+<li><a href="#">FAQs</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Contact Us</h3>
+<ul>
+<li>📍 Goriola Street, Lagos State, Nigeria</li>
+<li>📞 +234 810 969 7754</li>
+<li>✉️ adiscoglobaltravels@gmail.com</li>
+<li>🕐 Mon-Fri: 9AM - 8PM</li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Newsletter</h3>
+<p style="color: #aaa; margin-bottom: 1rem;">Subscribe for exclusive deals and travel tips.</p>
+<form style="display: flex; gap: 0.5rem;">
+<input type="email" placeholder="Your email" style="padding: 0.8rem; border-radius: 5px; border: none; flex: 1;">
+<button style="padding: 0.8rem 1.2rem; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer;">→</button>
+</form>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2024 Adisco Global Travels. All rights reserved. | Privacy Policy | Terms of Service</p>
+</div>
+</footer>
+<script>
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+const navbar = document.getElementById('navbar');
+if (window.scrollY > 50) {
+navbar.classList.add('scrolled');
+} else {
+navbar.classList.remove('scrolled');
+}
+});
+// Scroll reveal animation
+const revealElements = document.querySelectorAll('.reveal');
+const revealOnScroll = () => {
+revealElements.forEach(element => {
+const elementTop = element.getBoundingClientRect().top;
+const windowHeight = window.innerHeight;
+if (elementTop < windowHeight - 100) {
+element.classList.add('active');
+}
+});
+};
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+// Form submission
+document.getElementById('bookingForm').addEventListener('submit', (e) => {
+e.preventDefault();
+alert('Thank you for your inquiry! Our travel experts will contact you within 24 hours with a personalized quote.');
+e.target.reset();
+});
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+}
+});
+});
+// Destination card click interaction
+document.querySelectorAll('.destination-card').forEach(card => {
+card.addEventListener('click', () => {
+const destination = card.querySelector('h3').textContent;
+document.getElementById('destination').value = destination.toLowerCase().replace(/, /g, '-').replace(/ /g, '-');
+document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+});
+});
+</script>
+</body>
+</html>
